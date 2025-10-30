@@ -8,7 +8,7 @@ interface TrackerCardProps {
   icon: LucideIcon;
   color: string;
   goal?: number;
-  onUpdate: (newValue: string) => void;
+  onUpdate: (newValue: Number) => void;
 }
 
 const TrackerCard: React.FC<TrackerCardProps> = ({
@@ -22,10 +22,10 @@ const TrackerCard: React.FC<TrackerCardProps> = ({
 }) => {
   const [isEditing, setIsEditing] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(value);
-const progress = goal ? (parseFloat(String(value).replace(',', '')) / goal) * 100 : 0;
+const progress = goal ? (Number(value) / goal) * 100 : 0;
 
   const handleSave = () => {
-    if (onUpdate) onUpdate(inputValue);
+    if (onUpdate) onUpdate(Number(inputValue));
     setIsEditing(false);
   };
 

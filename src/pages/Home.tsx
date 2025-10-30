@@ -4,9 +4,9 @@ import TrackerCard from '../components/TrackerCard';
 import StatsCard from '../components/StatsCard';
 
 interface Metrics {
-  steps: string;
-  calories: string;
-  water: string;
+  steps: number;
+  calories: number;
+  water: number;
 }
 
 interface Goals {
@@ -18,7 +18,7 @@ interface Goals {
 interface HomeProps {
   metrics: Metrics;
   goals: Goals;
-  updateMetric: (metric: keyof Metrics, value: string) => void;
+updateMetric: (metric: keyof Metrics, value: number) => void;
 }
 
 const Home: React.FC<HomeProps> = ({ metrics, updateMetric, goals }) => {
@@ -37,7 +37,7 @@ const Home: React.FC<HomeProps> = ({ metrics, updateMetric, goals }) => {
           icon={Activity as LucideIcon}
           color="#10b981"
           goal={goals.steps}
-          onUpdate={(val) => updateMetric('steps', val)}
+          onUpdate={(val) => updateMetric('steps', Number(val))}
         />
         <TrackerCard
           title="Calories"
@@ -46,7 +46,7 @@ const Home: React.FC<HomeProps> = ({ metrics, updateMetric, goals }) => {
           icon={Flame as LucideIcon}
           color="#f97316"
           goal={goals.calories}
-          onUpdate={(val) => updateMetric('calories', val)}
+          onUpdate={(val) => updateMetric('calories', Number(val))}
         />
         <TrackerCard
           title="Water Intake"
@@ -55,7 +55,7 @@ const Home: React.FC<HomeProps> = ({ metrics, updateMetric, goals }) => {
           icon={Droplet as LucideIcon}
           color="#06b6d4"
           goal={goals.water}
-          onUpdate={(val) => updateMetric('water', val)}
+          onUpdate={(val) => updateMetric('water', Number(val))}
         />
       </div>
 
