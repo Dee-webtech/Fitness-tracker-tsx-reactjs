@@ -2,16 +2,15 @@ import React from 'react';
 import { Activity, Droplet, Flame, Award, type LucideIcon } from 'lucide-react';
 import AchievementBadge from '../components/AchievementBadge';
 
-// Define the expected structure for metrics (customize fields as needed)
+// Match App.tsx structure
 interface Metrics {
-  steps?: number;
-  calories?: number;
-  hydration?: number;
+  steps: number;
+  calories: number;
+  water: number;
 }
 
-// Define the component props type
 interface ProgressPageProps {
-  metrics?: Metrics;
+  metrics: Metrics;
 }
 
 const ProgressPage: React.FC<ProgressPageProps> = ({ metrics }) => {
@@ -27,17 +26,17 @@ const ProgressPage: React.FC<ProgressPageProps> = ({ metrics }) => {
 
           <div className="summary-item">
             <Activity color="#10b981" size={20} />
-            <span>Average Steps: {metrics?.steps ?? '5,847/day'}</span>
+            <span>Average Steps: {metrics.steps.toLocaleString()} /day</span>
           </div>
 
           <div className="summary-item">
             <Flame color="#f97316" size={20} />
-            <span>Total Calories: {metrics?.calories ?? '9,450 kcal'}</span>
+            <span>Total Calories: {metrics.calories.toLocaleString()} kcal</span>
           </div>
 
           <div className="summary-item">
             <Droplet color="#06b6d4" size={20} />
-            <span>Hydration Rate: {metrics?.hydration ?? '85%'}</span>
+            <span>Hydration: {metrics.water} L</span>
           </div>
         </div>
 

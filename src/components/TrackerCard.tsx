@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react';
 
 interface TrackerCardProps {
   title: string;
-  value: string;
+  value: number | string;
   unit: string;
   icon: LucideIcon;
   color: string;
@@ -22,7 +22,7 @@ const TrackerCard: React.FC<TrackerCardProps> = ({
 }) => {
   const [isEditing, setIsEditing] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(value);
-  const progress = goal ? (parseFloat(value.replace(',', '')) / goal) * 100 : 0;
+const progress = goal ? (parseFloat(String(value).replace(',', '')) / goal) * 100 : 0;
 
   const handleSave = () => {
     if (onUpdate) onUpdate(inputValue);

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Activity } from 'lucide-react';
 
+type Page = 'home' | 'progress' | 'settings';
+
 interface NavbarProps {
-  currentPage: string;
-  setCurrentPage: (page: string) => void;
+  currentPage: Page;
+  setCurrentPage: React.Dispatch<React.SetStateAction<Page>>;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
