@@ -1,58 +1,36 @@
-import React, { useState } from 'react';
-import { Activity } from 'lucide-react';
+import { useState } from "react";
 
-type Page = 'home' | 'progress' | 'settings';
-
-interface NavbarProps {
-  currentPage: Page;
-  setCurrentPage: React.Dispatch<React.SetStateAction<Page>>;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleNavClick = (page: Page) => {
-    setCurrentPage(page);
-    setIsMenuOpen(false); // Close menu after clicking
-  };
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="navbar">
-      <h1 className="logo">
-        <Activity size={28} />
-        FitTrack
-      </h1>
+    <nav className="flex items-center justify-between px-4 py-3 bg-white shadow-md relative">
+      {/* Logo */}
+      <h1 className="text-2xl font-bold text-green-600">FitTrack</h1>
 
-      {/* Hamburger button */}
-      <button 
-        className="hamburger" 
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      {/* Hamburger Icon */}
+      <button
+        className="md:hidden text-2xl focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        ☰
       </button>
 
-      {/* Navigation links */}
-      <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-        <li
-          className={currentPage === 'home' ? 'active' : ''}
-          onClick={() => handleNavClick('home')}
-        >
-          Home
+      {/* Menu Links */}
+      <ul
+        className={`md:flex md:space-x-6 font-medium ${
+          isOpen ? "block" : "hidden"
+        } absolute md:static bg-white w-full left-0 top-14 md:w-auto text-center md:text-left shadow-md md:shadow-none transition-all duration-300`}
+      >
+        <li className="p-2 md:p-0 hover:text-green-600">
+          <a href="#">Home</a>
         </li>
-        <li
-          className={currentPage === 'progress' ? 'active' : ''}
-          onClick={() => handleNavClick('progress')}
-        >
-          Progress
+        <li className="p-2 md:p-0 hover:text-green-600">
+          <a href="#">Progress</a>
         </li>
-        <li
-          className={currentPage === 'settings' ? 'active' : ''}
-          onClick={() => handleNavClick('settings')}
-        >
-          Settings
+        <li className="p-2 md:p-0 hover:text-green-600">
+          <a href="#">Settings</a>
         </li>
       </ul>
     </nav>
