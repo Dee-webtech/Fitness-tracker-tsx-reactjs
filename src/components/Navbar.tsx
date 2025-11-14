@@ -7,6 +7,8 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
+    console.log('Viewport width:', window.innerWidth); // <-- ADD THIS LINE HERE
+
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
