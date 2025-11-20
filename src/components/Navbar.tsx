@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { Activity } from "lucide-react";
-
+import type { Page } from "../App";
 interface NavbarProps {
-  currentPage: string;
-  setCurrentPage: (page: string) => void;
+  currentPage: Page;
+  setCurrentPage: (page: Page) => void;
 }
 
 const Navbar = ({ currentPage, setCurrentPage }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
-    { name: "Home", id: "home" },
-    { name: "Progress", id: "progress" },
-    { name: "Settings", id: "settings" },
-  ];
+  const navItems: { name: string; id: Page }[] = [
+  { name: "Home", id: "home" },
+  { name: "Progress", id: "progress" },
+  { name: "Settings", id: "settings" },
+];
+
 
   return (
     <nav className="navbar" role="navigation" aria-label="Main navigation">
