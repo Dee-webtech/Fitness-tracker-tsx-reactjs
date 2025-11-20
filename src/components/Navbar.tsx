@@ -1,58 +1,51 @@
-import { useState } from "react";
-import type { Page } from "../App";
+import React, { useState } from 'react';
+import { Activity } from 'lucide-react';
 
-interface NavbarProps {
-  currentPage: Page;
-  setCurrentPage: React.Dispatch<React.SetStateAction<Page>>;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ currentPage, setCurrentPage }) => {
-    console.log('Viewport width:', window.innerWidth); // <-- ADD THIS LINE HERE
-
+const Navbar = ({ currentPage, setCurrentPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", id: "home" },
-    { name: "Progress", id: "progress" },
-    { name: "Settings", id: "settings" },
+    { name: 'Home', id: 'home' },
+    { name: 'Progress', id: 'progress' },
+    { name: 'Settings', id: 'settings' },
   ];
 
   return (
-    <nav className="flex items-center justify-between px-4 py-3 bg-white shadow-md relative z-50">
-      {/* Logo */}
-      <h1 className="text-2xl font-bold text-green-600">FitTrack</h1>
+    <nav className="navbar" role="navigation" aria-label="Main navigation">
+      <div className="navbar-inner">
+        {/* Logo */}
+        <div className="logo" onClick={() => { setCurrentPage('home'); setIsOpen(false); }} style={{ cursor: 'pointer' }}>
+          <Activity size={24} className="logo-icon" />
+          <span className="logo-text">FitTrack</span>
+        </div>
 
-      {/* Hamburger Icon (mobile) */}
-      <button
-        className="md:hidden text-2xl focus:outline-none"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
-      >
-        ☰
-      </button>
+        {/* Hamburger (mobile) */}
+        <button
+          className="hamburger"
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+        >
+          <span className="hamburger-icon">☰</span>
+        </button>
 
-      {/* Navigation Links */}
-      <ul
-        className={`md:flex md:space-x-6 font-medium ${
-          isOpen ? "block" : "hidden"
-        } absolute md:static bg-white w-full left-0 top-14 md:w-auto text-center md:text-left shadow-md md:shadow-none transition-all duration-300`}
-      >
-        {navItems.map((item) => (
-          <li key={item.id} className="p-2 md:p-0">
-            <button
-              onClick={() => {
-                setCurrentPage(item.id as Page);
-                setIsOpen(false);
-              }}
-              className={`block w-full text-gray-700 hover:text-green-600 transition ${
-                currentPage === item.id ? "text-green-600 font-semibold" : ""
-              }`}
+        {/* Links */}
+        <ul className={`nav-links ${isOpen ? 'open' : ''}`}>
+          {navItems.map(item => (
+            <li
+              key={item.id}
+              className={currentPage === item.id ? 'active' : ''}
+              onClick={() => { setCurrentPage(item.id); setIsOpen(false); }}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter') { setCurrentPage(item.id); setIsOpen(false); } }}
             >
               {item.name}
-            </button>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 };
